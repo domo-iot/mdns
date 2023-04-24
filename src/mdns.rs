@@ -10,6 +10,7 @@ use async_std::net::UdpSocket;
 #[cfg(not(target_os = "windows"))]
 use net2::unix::UnixUdpBuilderExt;
 use std::net::SocketAddr;
+use net2::UdpSocketExt;
 
 /// The IP address for the mDNS multicast socket.
 const MULTICAST_ADDR: Ipv4Addr = Ipv4Addr::new(224, 0, 0, 251);
@@ -23,6 +24,7 @@ pub fn mdns_interface(
 
     socket.set_multicast_loop_v4(false)?;
     socket.join_multicast_v4(&MULTICAST_ADDR, &interface_addr)?;
+    socket.set_multicast_if_v4(&interface_addr)?;
 
     let socket = Arc::new(UdpSocket::from(socket));
 
