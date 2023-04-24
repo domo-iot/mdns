@@ -23,8 +23,10 @@ pub fn mdns_interface(
     let socket = create_socket()?;
 
     socket.set_multicast_loop_v4(false)?;
-    socket.join_multicast_v4(&MULTICAST_ADDR, &interface_addr)?;
     socket.set_multicast_if_v4(&interface_addr)?;
+    socket.join_multicast_v4(&MULTICAST_ADDR, &interface_addr)?;
+    socket.set_multicast_ttl_v4(42)?;
+
 
     let socket = Arc::new(UdpSocket::from(socket));
 
