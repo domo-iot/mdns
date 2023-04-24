@@ -66,7 +66,7 @@ pub struct mDNSSender<> {
 impl mDNSSender {
     /// Send multicasted DNS queries.
     pub async fn send_request(&mut self) -> Result<(), Error> {
-        let mut builder = dns_parser::Builder::new_query(0, false);
+        let mut builder = dns_parser::Builder::new_query(1234, false);
         let prefer_unicast = false;
         builder.add_question(
             &self.service_name,
