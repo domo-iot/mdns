@@ -46,7 +46,7 @@ fn create_socket() -> io::Result<std::net::UdpSocket> {
     net2::UdpBuilder::new_v4()?
         .reuse_address(true)?
         .reuse_port(true)?
-        .bind((ADDR_ANY, MULTICAST_PORT))
+        .bind((10.0.1.1, MULTICAST_PORT))
 }
 
 #[cfg(target_os = "windows")]
