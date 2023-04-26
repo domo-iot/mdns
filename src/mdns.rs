@@ -44,7 +44,8 @@ const ADDR_ANY: Ipv4Addr = Ipv4Addr::new(0, 0, 0, 0);
 #[cfg(not(target_os = "windows"))]
 fn create_socket() -> io::Result<std::net::UdpSocket> {
 
-    let addr = Ipv4Addr::new(10, 0, 1, 1)
+    let addr = Ipv4Addr::new(10, 0, 1, 1);
+
     net2::UdpBuilder::new_v4()?
         .reuse_address(true)?
         .reuse_port(true)?
